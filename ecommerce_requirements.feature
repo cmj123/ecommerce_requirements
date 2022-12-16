@@ -12,6 +12,14 @@ Then the product is added to the basket
 And a message is displayed to the user
 And the stock level is reduced by one
 
+Scenario: As a user I should be able to login to my account using my credentials
+Given the user is on the login page
+And the sigin button is displayed
+When the user enters their username 
+And the user click the login button 
+Then the user is authenticated
+And the user is on the account page
+
 # Failure Path - Product is not in the stock and not in the basket
 Scenario: As a customer I am unable to add an item to my shopping basket if not in stock
 Given I am on the product detial page
