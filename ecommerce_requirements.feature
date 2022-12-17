@@ -2,11 +2,18 @@ Feature: As a customer I should be able to deith the content of my shopping bask
 
     As a customer I should be able to deith the content of my shopping basket, change quantities, and then checkout
 
+Background:
+    Given product "1" has a stock level of "2"
+    And product "2" has a stock level of "0"
+    And product "3" has a stock level of "2"
+    And product "1" has basket quantity of "0"
+    And product "2" has a basket quantity of "0"
+    And product "3" has a basket quantity of "1"
+
+
 # Success Path - Customer can order
 Scenario: As a customer I can add an item to my shopping basket
 Given I am on the product detial page of product "1"
-And product "1" has a stock level of "2"
-And product "1" has basket quantity of "0"
 When I click the add to Basket button
 Then product "1" has a basket quantity of "1"
 And a message is displayed to the user
@@ -42,8 +49,6 @@ And the user will to account page
 # Failure Path - Product is not in the stock and not in the basket
 Scenario: As a customer I am unable to add an item to my shopping basket if not in stock
 Given I am on the product detail page of product "2"
-And product "2" has a stock level of "0"
-And product "2" has a basket quantity of "0"
 When I click the Add to Basket button
 And product "2" has a basket quantity of "0"
 And product "2" has a stock level of "0"
@@ -51,8 +56,6 @@ And product "2" has a stock level of "0"
 # Failure Path - Product is stock and in the basket
 Scenario: As a customer I am unable to add an item to my shopping basket if it's already in the basket
 Given I am on the product detail page of product "3"
-And product "3" has a stock level of "2"
-And product "3" has a basket quantity of "1"
 When I click the Add to Basket button
 Then a message is displayed to the user
 And product "3" has a basket quantity of "1"
