@@ -3,12 +3,11 @@ Feature: As a customer I should be able to deith the content of my shopping bask
     As a customer I should be able to deith the content of my shopping basket, change quantities, and then checkout
 
 Background:
-    Given product "1" has a stock level of "2"
-    And product "2" has a stock level of "0"
-    And product "3" has a stock level of "2"
-    And product "1" has basket quantity of "0"
-    And product "2" has a basket quantity of "0"
-    And product "3" has a basket quantity of "1"
+    Given a user has the following data:
+    | Product   | Stock | Basket    |
+    |1          |2      | 0         |
+    |2          |0      | 0         |
+    |3          |2      | 1         |
 
 
 # Success Path - Customer can order
