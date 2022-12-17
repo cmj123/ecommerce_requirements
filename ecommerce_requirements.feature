@@ -4,13 +4,13 @@ Feature: As a customer I should be able to deith the content of my shopping bask
 
 # Success Path - Customer can order
 Scenario: As a customer I can add an item to my shopping basket
-Given I am on the product detial page
-And the product is in stock
-And this product is currently not in the basket
+Given I am on the product detial page of product "1"
+And product "1" has a stock level of "2"
+And product "1" has basket quantity of "0"
 When I click the add to Basket button
-Then the product is added to the basket
+Then product "1" has a basket quantity of "1"
 And a message is displayed to the user
-And the stock level is reduced by one
+And product "1" has a stock level of "1"
 
 Scenario: As a user I should be able to login to my account using my credentials
 Given the user is on the login page
@@ -41,21 +41,22 @@ And the user will to account page
 
 # Failure Path - Product is not in the stock and not in the basket
 Scenario: As a customer I am unable to add an item to my shopping basket if not in stock
-Given I am on the product detial page
-And the product is not in stock
-And this product is currently not in the basket
-Then the product is added to the basket
-And a message is displayed to the user
-And the stock level is unchanged
+Given I am on the product detail page of product "2"
+And product "2" has a stock level of "0"
+And product "2" has a basket quantity of "0"
+When I click the Add to Basket button
+And product "2" has a basket quantity of "0"
+And product "2" has a stock level of "0"
 
 # Failure Path - Product is stock and in the basket
 Scenario: As a customer I am unable to add an item to my shopping basket if it's already in the basket
-Given I am on the product detial page
-And the product is in stock
-And this product is currently in the basket 
-Then the product is added to the basket
-And a message is displayed to the user
-And the stock level is unchanged
+Given I am on the product detail page of product "3"
+And product "3" has a stock level of "2"
+And product "3" has a basket quantity of "1"
+When I click the Add to Basket button
+Then a message is displayed to the user
+And product "3" has a basket quantity of "1"
+And product "3" has a stock level of "2"
 
 Scenario: As a customer I can remove an item from my shopping basket
 Given I am on the basket page 
