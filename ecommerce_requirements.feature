@@ -9,33 +9,18 @@ Background:
     |2          |0      | 0         |
     |3          |2      | 1         |
 
-
-# Success Path - Customer can order
-Scenario: As a customer I can add an item to my shopping basket
-Given I am on the product detail page of product "1"
-When I click the add to Basket button
-Then product "1" has the following quantities:
-| Stock | Basket    |
-| 1     | 1         |
+Scenario Outline: Adding items to a basket
+Given I am on the product detail page of product <product>
+When I click the Add to Basket button
+Then product <product> has a stock level of <stock>
+Then product <product> has a basket quantity of <basket>
 And a message is displayed to the user
 
-# Failure Path - Product is not in the stock and not in the basket
-Scenario: As a customer I am unable to add an item to my shopping basket if not in stock
-Given I am on the product detail page of product "2"
-When I click the Add to Basket button
-And product "2" has the following quantities:
-| Stock | Basket    |
-| 0     | 0         |
-And a message is displayed to the user 
-
-# Failure Path - Product is stock and in the basket
-Scenario: As a customer I am unable to add an item to my shopping basket if it's already in the basket
-Given I am on the product detail page of product "3"
-When I click the Add to Basket button
-And product "3" has the following quantities:
-| Stock | Basket    |
-| 3     | 2         |
-And a message is displayed to the user
+Examples:
+| Product   | Stock     | Basket    |
+| 1         | 1         |   1       |
+| 2         | 0         |   0       |
+| 3         | 3         |   2       |
 
 Scenario: As a user I should be able to login to my account using my credentials
 Given the user is on the login page
