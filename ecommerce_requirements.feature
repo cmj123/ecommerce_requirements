@@ -12,15 +12,16 @@ Background:
 Scenario Outline: Adding items to a basket
 Given I am on the product detail page of product <product>
 When I click the Add to Basket button
-Then product <product> has a stock level of <stock>
-Then product <product> has a basket quantity of <basket>
-And a message is displayed to the user
+Then the quantities are:
+| Stock     | Basket    |
+| <stock>   | <basket>  |
+And a message <message> is displayed to the user
 
 Examples:
-| Product   | Stock     | Basket    |
-| 1         | 1         |   1       |
-| 2         | 0         |   0       |
-| 3         | 3         |   2       |
+| Description       | Product   | Stock     | Basket    | Message                   |
+| In Stock          | 1         | 1         |   1       | 'Added to the basket'     |
+| Not In Stock      | 2         | 0         |   0       | 'Not in stock'            |
+| Already in Basket | 3         | 3         |   2       | 'Limited to only only'    |
 
 Scenario: As a user I should be able to login to my account using my credentials
 Given the user is on the login page
